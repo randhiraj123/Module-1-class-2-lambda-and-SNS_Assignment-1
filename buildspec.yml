@@ -5,7 +5,7 @@ phases:
       python: 3.9
     commands:
       - echo "installing dependencies"
-      - pip3 install requirements.txt -t lib
+      - pip3 install -r requirements.txt -t lib
       - echo "dependencies successfully installed"
   build:
     commands:
