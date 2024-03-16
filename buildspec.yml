@@ -20,5 +20,5 @@ phases:
       - echo "post_build starts"
       - aws s3 cp deployment-package-assignment-1.zip s3://doordash-processing-bucket-module-assignment-1/
       - echo "s3 copy successfull"
-      - aws lambda --update-function-code --function-name module2-class-1-assignment-doordash-delivery-ci-cd --s3-bucket doordash-processing-bucket-module-assignment-1 --s3-key deployment-package-assignment-1.zip
+      - aws lambda update-function-code --function-name module2-class-1-assignment-doordash-delivery-ci-cd --s3-bucket doordash-processing-bucket-module-assignment-1 --s3-key deployment-package-assignment-1.zip
       - echo "deployment completed"  
