@@ -1,0 +1,24 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - echo "installing dependencies"
+      - pip3 install requirements.txt -t lib
+      - echo "dependencies successfully installed"
+  build:
+    commands:
+      - echo "zipping dependencies"
+      - cd lib
+      - zip -r9 ../deployment-package-assignment-1.zip .
+      - cd ..
+      - zip -g deployment-package-assignment-1.zip Module-1-class-2-assignment_1.py
+      - echo "build successfull"
+  post_build:
+    commands:
+      - echo "post_build starts"
+      - aws s3 cp deployment-package-assignment-1.zip s3://doordash-processing-bucket-module-assignment-1/
+      - echo "s3 copy successfull"
+      - aws lambda --update-function-code --function-name module2-class-1-assignment-doordash-delivery-ci-cd --s3-bucket doordash-processing-bucket-module-assignment-1 --s3-key deployment-package-assignment-1.zip
+      - echo "deployment completed"  
